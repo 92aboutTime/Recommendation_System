@@ -61,3 +61,99 @@ TAGNN에선, target-aware attention은 다양한 타겟 항목과 관련하여, 
 > Moreover, TAGNN harnesses the power of graph neural networks to capture rich item transitions in sessions. 
 
 또한 TAGNN은 그래프 신경망의 힘을 활용하여 Session에서 풍부한 항목 전환을 캡처합니다.
+
+
+
+## YOOCHOOSE Data
+
+https://recsys.yoochoose.net/challenge.html
+
+> YOOCHOOSE is providing a collection of sequences of click events: click sessions. 
+>
+> For some of the sessions, there are also buying events.
+>
+> The goal is hence to predict whether the user (a session) is going to buy something or not, and if he is buying, what would be the items he is going to buy.
+
+YOOCHOOSE 데이터는 click sessions을 제공한다.
+
+어떠한 세션에선 구매가 이뤄지기도 한다. 
+
+목적은 user가 상품을 살지 안살지를 예측하는 것이고, 산다면 어떠한 상품을 살지 예측해야 한다.
+
+
+
+> ### The Task
+>
+> 1. Is the user going to buy items in this session? Yes|No
+> 2. If yes, what are the items that are going to be bought?
+
+> ### The Data 
+>
+> 	##### Train Data
+>
+> 1. yoochoose-clicks.dat - Click events. Each record/line in the file has the following fields:
+>    1. Session ID – the id of the session. In one session there are one or many clicks.
+>    2. Timestamp – the time when the click occurred.
+>    3. Item ID – the unique identifier of the item.
+>    4. Category – the category of the item.
+> 2. yoochoose-buys.dat - Buy events. Each record/line in the file has the following fields:
+>    1. Session ID - the id of the session. In one session there are one or many buying events.
+>    2. Timestamp - the time when the buy occurred.
+>    3. Item ID – the unique identifier of item.
+>    4. Price – the price of the item.
+>    5. Quantity – how many of this item were bought.
+>
+> The Session ID in yoochoose-buys.dat will always exist in the yoochoose-clicks.dat file – the records with the same Session ID together form the sequence of click events of a certain user during the session. The session could be short (few minutes) or very long (few hours), it could have one click or hundreds of clicks. All depends on the activity of the user.
+>
+> 
+>
+> ##### Test Data
+>
+> 1. yoochoose-test.dat - identically structured as the yoochoose-clicks.dat of the training data
+>    1. Session ID
+>    2. Timestamp
+>    3. Item ID
+>    4. Category
+>
+> 
+>
+> ### Solution File
+>
+> 
+
+Session 이라는게 한번 클릭하고 다음 클릭까지의 과정으로 생각하면 될거 같다.
+
+Session ID란 어떠한 값일까??? 내 생각에는 켜있는 브라우져 하나당 하나의 Session ID 가 부여될거 같다. 맞는지 확인 필요하다.
+
+
+
+
+
+## Introduction
+
+> ![TAGNN Overview](C:\Users\wq_ysw\Desktop\Project\Recommendation_System\TAGNN\TAGNN Overview.png)
+>
+> Figure 1 gives an overview of the TAGNN method. 
+>
+> We first construct session graphs using items in historical sessions. 
+
+Session Graphs를 만든다.
+
+> After that, we obtain corresponding embeddings using graph neural networks to capture complex item transitions based on session graphs.
+> Given the item embeddings, we employ a target-aware attentive network to activate specific user interests with respect to a target item. 
+
+complex item transitions : 무슨 뜻인지 찾아본다.
+
+> Following that, we construct session embeddings. 
+>
+> At last, for each session, we can infer the user’s next action based on item embeddings and the session embedding. 
+>
+> The main contribution of this work is threefold. Firstly, we model items in sessions as session graphs to capture complex item transitions within sessions. 
+>
+> Then, we employ graph neural networks to obtain item embeddings. 
+>
+> Secondly, to adaptively activate users’ diverse interests in sessions, we propose a novel target attentive network. 
+>
+> The proposed target attentive module can reveal the relevance of historical actions given a certain target item, which further improves session representations. 
+>
+> Finally, we conduct extensive experiments on real-world datasets. The empirical studies show that our method achieves state-of-the-art performance.
